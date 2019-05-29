@@ -20,4 +20,5 @@ public:
 	int getStep();
 	int getPush();
 	bool isMap(int i, int j);
+	void printMap();
 };

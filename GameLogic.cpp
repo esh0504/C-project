@@ -125,6 +125,15 @@ int GameLogic::getPush()
 {
 	return push;
 }
+void GameLogic::printMap()
+{
+	for (int i = 0; i < R; i++)
+	{
+		for (int j = 0; j < C; j++)
+			cout << map[i][j];
+		cout << "\n";
+	}
+}
 int main(void)
 {
 	ifstream input("input.txt");
