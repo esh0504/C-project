@@ -64,14 +64,14 @@ void GameLogic::Move(int direction)
 
 	if (!myPos)
 	{
-		cout << "캐릭터가 맵 안에 없습니다.\n";
+		//cout << "캐릭터가 맵 안에 없습니다.\n";
 		return;
 	}
 
 	direction = Convert_dir(direction);
 	if (direction == -1)
 	{
-		cout << "올바른 방향을 입력하지 않았습니다\n";
+		//cout << "올바른 방향을 입력하지 않았습니다\n";
 		return;
 	}
 	pii movePos = *myPos + dir[direction];
