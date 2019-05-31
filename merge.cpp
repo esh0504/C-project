@@ -1,7 +1,7 @@
 #include <ncurses.h>
 #include <iostream>
-#include <fstream>
 #include <vector>
+#include <fstream>
 #include <stdlib.h>
 #include <string>
 
@@ -22,21 +22,20 @@
 using namespace std;
 
 string char_list = ".^#x~+o*";
-
 class UI
 {
 public:
 	UI()
 	{
 		initscr();
-		curs_set(0);		   //실행 시 커서 비활성화
+		curs_set(0);			   //실행 시 커서 비활성화
 		if (has_colors() == FALSE) //사용자의 터미널(커맨드)에서 색상을 지원하는지 여부확인
 		{
 			endwin();
 			printf("Your terminal does not support color\n");
 			exit(1);
 		}
-		start_color();				      // Color 사용 선언
+		start_color();								  // Color 사용 선언
 		if (init_color(COLOR_BLUE, 0, 0, 300) == ERR) //터미널에서 색상이 정상적으로 바뀌는지 여부확인
 		{
 			printw("Your terminal cannot change the color definitions\n");
@@ -44,13 +43,13 @@ public:
 			getch();
 			move(0, 0);
 		}
-		init_pair(EMPTY, COLOR_WHITE, COLOR_BLACK);	//0(빈칸):  하양, 검정
-		init_pair(WALL, COLOR_BLACK, COLOR_WHITE);	 //1(벽): 검정, 노랑
-		init_pair(BOX, COLOR_MAGENTA, COLOR_YELLOW);       //2(상자): 분홍, 노랑
+		init_pair(EMPTY, COLOR_WHITE, COLOR_BLACK);		   //0(빈칸):  하양, 검정
+		init_pair(WALL, COLOR_BLACK, COLOR_WHITE);		   //1(벽): 검정, 노랑
+		init_pair(BOX, COLOR_MAGENTA, COLOR_YELLOW);	   //2(상자): 분홍, 노랑
 		init_pair(DESTINATION, COLOR_YELLOW, COLOR_BLACK); //3(목표): 노랑, 검정
-		init_pair(OUTSIDE, COLOR_CYAN, COLOR_BLUE);	//4(바깥): 형광, 파랑
-		init_pair(DESBOX, COLOR_YELLOW, COLOR_RED);	//5(목표+상자): 노랑, 빨강
-		init_pair(CHARACTER, COLOR_RED, COLOR_MAGENTA);    //6(캐릭터) 빨강, 분홍
+		init_pair(OUTSIDE, COLOR_CYAN, COLOR_BLUE);		   //4(바깥): 형광, 파랑
+		init_pair(DESBOX, COLOR_YELLOW, COLOR_RED);		   //5(목표+상자): 노랑, 빨강
+		init_pair(CHARACTER, COLOR_RED, COLOR_MAGENTA);	//6(캐릭터) 빨강, 분홍
 		init_pair(DESCHARACTER, COLOR_CYAN, COLOR_CYAN);   //7(목표+캐릭터):  형광, 형광
 	}
 	void menu(int s, int p)
@@ -95,7 +94,6 @@ public:
 	int getPush();
 	bool isMap(int i, int j);
 };
-
 typedef pair<int, int> pii;
 pair<int, int> operator+(pair<int, int> &i, pair<int, int> &j)
 {
@@ -134,7 +132,6 @@ bool GameLogic::isMap(int i, int j)
 		return false;
 	return true;
 }
-
 void GameLogic::Move(int direction)
 {
 	pii dir[4];
@@ -164,7 +161,6 @@ void GameLogic::Move(int direction)
 		cout << "올바른 방향을 입력하지 않았습니다\n";
 		return;
 	}
-
 	pii movePos = *myPos + dir[direction];
 	if (!isMap(myPos->first, myPos->second))
 		return;
@@ -220,10 +216,10 @@ int GameLogic::getPush()
 }
 
 int map[5][10][10] = {{{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {1, 1, 1, 1, 4, 4, 4, 4, 4, 4}, {1, 3, 0, 1, 1, 4, 4, 4, 4, 4}, {1, 3, 6, 0, 1, 4, 4, 4, 4, 4}, {1, 3, 0, 2, 1, 4, 4, 4, 4, 4}, {1, 1, 2, 0, 1, 1, 1, 4, 4, 4}, {4, 1, 0, 2, 0, 0, 1, 4, 4, 4}, {4, 1, 0, 0, 0, 0, 1, 4, 4, 4}, {4, 1, 0, 0, 1, 1, 1, 4, 4, 4}, {4, 1, 1, 1, 1, 4, 4, 4, 4, 4}},
-		      {{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 1, 1, 1, 1, 1, 4, 4, 4}, {4, 4, 1, 0, 0, 0, 1, 4, 4, 4}, {4, 4, 1, 3, 3, 3, 1, 4, 4, 4}, {4, 4, 1, 2, 2, 2, 1, 1, 4, 4}, {4, 4, 1, 0, 0, 6, 0, 1, 4, 4}, {4, 4, 1, 0, 0, 0, 0, 1, 4, 4}, {4, 4, 1, 1, 1, 1, 1, 1, 4, 4}},
-		      {{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 1, 1, 1, 1, 1, 1, 1, 4}, {4, 4, 1, 0, 0, 0, 0, 0, 1, 4}, {4, 4, 1, 0, 3, 2, 3, 6, 1, 4}, {4, 4, 1, 0, 2, 3, 2, 0, 1, 4}, {4, 4, 1, 0, 3, 2, 3, 0, 1, 4}, {4, 4, 1, 0, 0, 0, 0, 0, 1, 4}, {4, 4, 1, 1, 1, 1, 1, 1, 1, 4}},
-		      {{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 1, 1, 1, 1, 1, 1, 1, 1, 4}, {4, 1, 3, 0, 0, 0, 0, 0, 1, 4}, {4, 1, 0, 3, 2, 2, 2, 0, 1, 4}, {4, 1, 3, 0, 0, 0, 0, 0, 1, 4}, {4, 1, 1, 1, 1, 1, 6, 0, 1, 4}, {4, 4, 4, 4, 4, 1, 1, 1, 1, 4}},
-		      {{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 1, 1, 1, 1, 4, 4, 4, 4, 4}, {4, 1, 0, 0, 1, 1, 1, 1, 4, 4}, {4, 1, 0, 0, 0, 0, 0, 1, 1, 4}, {1, 1, 0, 1, 1, 0, 0, 0, 1, 4}, {1, 3, 0, 3, 1, 0, 0, 2, 1, 1}, {1, 0, 0, 0, 1, 0, 2, 2, 0, 1}, {1, 0, 0, 3, 1, 0, 6, 0, 0, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}}};
+					  {{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 1, 1, 1, 1, 1, 4, 4, 4}, {4, 4, 1, 0, 0, 0, 1, 4, 4, 4}, {4, 4, 1, 3, 3, 3, 1, 4, 4, 4}, {4, 4, 1, 2, 2, 2, 1, 1, 4, 4}, {4, 4, 1, 0, 0, 6, 0, 1, 4, 4}, {4, 4, 1, 0, 0, 0, 0, 1, 4, 4}, {4, 4, 1, 1, 1, 1, 1, 1, 4, 4}},
+					  {{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 1, 1, 1, 1, 1, 1, 1, 4}, {4, 4, 1, 0, 0, 0, 0, 0, 1, 4}, {4, 4, 1, 0, 3, 2, 3, 6, 1, 4}, {4, 4, 1, 0, 2, 3, 2, 0, 1, 4}, {4, 4, 1, 0, 3, 2, 3, 0, 1, 4}, {4, 4, 1, 0, 0, 0, 0, 0, 1, 4}, {4, 4, 1, 1, 1, 1, 1, 1, 1, 4}},
+					  {{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 1, 1, 1, 1, 1, 1, 1, 1, 4}, {4, 1, 3, 0, 0, 0, 0, 0, 1, 4}, {4, 1, 0, 3, 2, 2, 2, 0, 1, 4}, {4, 1, 3, 0, 0, 0, 0, 0, 1, 4}, {4, 1, 1, 1, 1, 1, 6, 0, 1, 4}, {4, 4, 4, 4, 4, 1, 1, 1, 1, 4}},
+					  {{4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 4, 4, 4, 4, 4, 4, 4, 4, 4}, {4, 1, 1, 1, 1, 4, 4, 4, 4, 4}, {4, 1, 0, 0, 1, 1, 1, 1, 4, 4}, {4, 1, 0, 0, 0, 0, 0, 1, 1, 4}, {1, 1, 0, 1, 1, 0, 0, 0, 1, 4}, {1, 3, 0, 3, 1, 0, 0, 2, 1, 1}, {1, 0, 0, 0, 1, 0, 2, 2, 0, 1}, {1, 0, 0, 3, 1, 0, 6, 0, 0, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}}};
 int mapGame[10][10];
 
 void copy(int num)
@@ -236,55 +232,55 @@ void copy(int num)
 		}
 	}
 }
-
 int main(void)
 {
-	UI view;
+	UI view = UI();
 	keypad(stdscr, TRUE);
 	for (int i = 0; i < 5; i++)
 	{
 		copy(i);
 		int **m = new int *[10];
 		for (int i = 0; i < 10; i++)
+		{
 			m[i] = new int[10];
-		for (int j = 0; j < 10; j++)
-		{
-			m[i][j] = mapGame[i][j];
+			for (int j = 0; j < 10; j++)
+			{
+				m[i][j] = mapGame[i][j];
+			}
 		}
-	}
-	GameLogic game = GameLogic(m, 10, 10);
-	view.draw(m, game.getStep(), game.getPush());
-	while (!game.isGameclear())
-	{
-		int key = getch();
-		if (key == 27) //ESC
-		{
-			break;
-		}
-		else if (key == KEY_UP)
-		{
-			game.Move(8);
-		}
-		else if (key == KEY_DOWN)
-		{
-			game.Move(2);
-		}
-		else if (key == KEY_RIGHT)
-		{
-			game.Move(6);
-		}
-		else if (key == KEY_LEFT)
-		{
-			game.Move(4);
-		}
-		else if (key == 'r')
-		{
-			copy(i);
-			game = GameLogic(m, 10, 10);
-		}
+		GameLogic game = GameLogic(m, 10, 10);
 		view.draw(m, game.getStep(), game.getPush());
+		while (!game.isGameclear())
+		{
+			int key = getch();
+			if (key == 27)
+			{
+				break;
+			}
+			else if (key == KEY_UP)
+			{
+				game.Move(8);
+			}
+			else if (key == KEY_DOWN)
+			{
+				game.Move(2);
+			}
+			else if (key == KEY_RIGHT)
+			{
+				game.Move(6);
+			}
+			else if (key == KEY_LEFT)
+			{
+				game.Move(4);
+			}
+			else if (key == 'r')
+			{
+				copy(i);
+				game = GameLogic(m, 10, 10);
+			}
+			view.draw(m, game.getStep(), game.getPush());
+		}
 	}
-}
-endwin();
-return 0;
+	getch();
+	endwin();
 }
