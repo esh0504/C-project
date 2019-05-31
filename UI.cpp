@@ -13,6 +13,7 @@
 #define DESCHAR_INDEX 7
 
 std::string char_list=".^#x~+o*";
+
 class UI {
         public:
                 UI()
