@@ -3,14 +3,14 @@
 #include <string>
 
 //대상별 색상인덱스 설정
-#define EMPTY_INDEX 0
-#define WALL_INDEX 1
-#define BOX_INDEX 2
-#define DEST_INDEX 3
-#define OUTSIDE_INDEX 4
-#define DESBOX_INDEX 5
-#define CHARACTER_INDEX 6
-#define DESCHAR_INDEX 7
+#define EMPTY 0
+#define WALL 1
+#define BOX 2
+#define DESTINATION 3
+#define OUTSIDE 4
+#define DESBOX 5
+#define CHARACTER 6
+#define DESCHARACTER 7
 
 std::string char_list = ".^#x~+o*";
 
