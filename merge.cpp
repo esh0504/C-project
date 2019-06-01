@@ -234,53 +234,61 @@ void copy(int num)
 }
 int main(void)
 {
-	UI view = UI();
-	keypad(stdscr, TRUE);
-	for (int i = 0; i < 5; i++)
-	{
-		copy(i);
-		int **m = new int *[10];
-		for (int i = 0; i < 10; i++)
-		{
-			m[i] = new int[10];
-			for (int j = 0; j < 10; j++)
-			{
-				m[i][j] = mapGame[i][j];
-			}
-		}
-		GameLogic game = GameLogic(m, 10, 10);
-		view.draw(m, game.getStep(), game.getPush());
-		while (!game.isGameclear())
-		{
-			int key = getch();
-			if (key == 27)
-			{
-				break;
-			}
-			else if (key == KEY_UP)
-			{
-				game.Move(8);
-			}
-			else if (key == KEY_DOWN)
-			{
-				game.Move(2);
-			}
-			else if (key == KEY_RIGHT)
-			{
-				game.Move(6);
-			}
-			else if (key == KEY_LEFT)
-			{
-				game.Move(4);
-			}
-			else if (key == 'r')
-			{
-				copy(i);
-				game = GameLogic(m, 10, 10);
-			}
-			view.draw(m, game.getStep(), game.getPush());
-		}
-	}
-	getch();
-	endwin();
+        UI view = UI();
+        keypad(stdscr, TRUE);
+        for (int i = 0; i < 5; i++)
+        {
+                copy(i);
+                int **m = new int *[10];
+                for (int i = 0; i < 10; i++)
+                {
+                        m[i] = new int[10];
+                        for (int j = 0; j < 10; j++)
+                        {
+                                m[i][j] = mapGame[i][j];
+                        }
+                }
+                GameLogic game = GameLogic(m, 10, 10);
+                view.draw(m, game.getStep(), game.getPush());
+                while (!game.isGameclear())
+                {
+                        int key = getch();
+                        if (key == 27)
+                        {
+                                break;
+                        }
+                        else if (key == KEY_UP)
+                        {
+                                game.Move(8);
+                        }
+                        else if (key == KEY_DOWN)
+                        {
+                                game.Move(2);
+                        }
+                        else if (key == KEY_RIGHT)
+                        {
+                                game.Move(6);
+                        }
+                        else if (key == KEY_LEFT)
+                        {
+                                game.Move(4);
+                        }
+                        else if (key == 'r')
+                        {
+                                copy(i);
+                                for(int i = 0; i < 10; i++)
+                                {
+                                        m[i] = new int[10];
+                                        for(int j = 0; j < 10; j++)
+                                        {
+                                                m[i][j] = mapGame[i][j];
+                                        }
+                                }
+                                game = GameLogic(m, 10, 10);
+                        }
+                        view.draw(m, game.getStep(), game.getPush());
+                }
+        }
+        getch();
+        endwin();
 }
