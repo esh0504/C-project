@@ -1,4 +1,4 @@
-PullBox Game with C++&&Ncureses
+PullBox Game with C++&&Ncurses
 
 
 
